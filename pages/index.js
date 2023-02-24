@@ -39,10 +39,10 @@ export default function Home() {
             <Image
               src="/city-image.png"
               alt="Building image"
-              boxSize={{ base: "300px", md: "420px" }}
+              boxSize={{ base: "270px", md: "420px", lg: '600px' }}
               position="absolute"
               top="50%"
-              left={{ base: "20px", md: "30%" }}
+              left={{ base: "15%", md: "30%" }}
               transform="translate(-50%, -50%)"
               zIndex={1}
             ></Image>
