@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Image, VStack } from "@chakra-ui/react";
+import { Collapse, Image, useDisclosure, VStack } from "@chakra-ui/react";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import {
@@ -14,10 +14,19 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { isOpen, onToggle } = useDisclosure();
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleForms = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <>
       <Head>
@@ -39,7 +48,7 @@ export default function Home() {
             <Image
               src="/city-image.png"
               alt="Building image"
-              boxSize={{ base: "270px", md: "420px", lg: '600px' }}
+              boxSize={{ base: "270px", md: "420px", lg: "600px" }}
               position="absolute"
               top="50%"
               left={{ base: "15%", md: "30%" }}
@@ -55,37 +64,87 @@ export default function Home() {
           borderRadius="40px 0 0 40px"
         >
           <Flex justifyContent="center" alignItems="center" h="100%">
-            <form>
-              <Heading as="h4" size="md" mb="15px">
-                Login
-              </Heading>
-              <FormControl mb="20px">
-                <FormLabel> Username or Email Address:</FormLabel>
-                <Input
-                  size="xs"
-                  type="email"
-                  name="email"
-                  placeholder="Username/Email Address"
-                  variant="flushed"
-                  borderBottom="1px solid #ABCDEF"
-                />
-              </FormControl>
-              <FormControl mb="10px">
-                <FormLabel>Password:</FormLabel>
-                <Input
-                  size="xs"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  variant="flushed"
-                  borderBottom="1px solid #ABCDEF"
-                />
-                <FormHelperText> Forgot Password? Click here</FormHelperText>
-              </FormControl>
-              <Button type="submit" bgColor="#ABCDEF" color="white">
-                Submit
-              </Button>
-            </form>
+            <AnimatePresence>
+              {isVisible ? (
+                <motion.div
+                  key="login-form"
+                  initial={{ opacity: 0, x: "-100%" }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: "100%" }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <form>
+                    <Heading as="h4" size="md" mb="15px">
+                      Login
+                    </Heading>
+                    <FormControl mb="20px">
+                      <FormLabel> Username or Email Address:</FormLabel>
+                      <Input
+                        size="xs"
+                        type="email"
+                        name="email"
+                        placeholder="Username/Email Address"
+                        variant="flushed"
+                        borderBottom="1px solid #ABCDEF"
+                      />
+                    </FormControl>
+                    <FormControl mb="10px">
+                      <FormLabel>Password:</FormLabel>
+                      <Input
+                        size="xs"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        variant="flushed"
+                        borderBottom="1px solid #ABCDEF"
+                      />
+                      <FormHelperText>
+                        Forgot Password?
+                        <Button onClick={toggleForms}>Click Here</Button>
+                      </FormHelperText>
+                    </FormControl>
+                    <Button type="submit" bgColor="#ABCDEF" color="white">
+                      Submit
+                    </Button>
+                  </form>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="forgot-password-form"
+                  initial={{ opacity: 0, x: "100%" }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: "-100%" }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <form>
+                    <Heading as="h4" size="md" mb="15px">
+                      Forgot Password
+                    </Heading>
+                    <FormControl mb="20px">
+                      <FormLabel> Email Address:</FormLabel>
+                      <Input
+                        size="xs"
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        variant="flushed"
+                        borderBottom="1px solid #ABCDEF"
+                      />
+                      <FormHelperText mb="10px">
+                        Enter email address used to open account
+                      </FormHelperText>
+                      <Button type="submit" bgColor="#ABCDEF" color="white">
+                        Submit
+                      </Button>
+                      <FormHelperText>
+                        Go back to Login page{" "}
+                        <Button onClick={toggleForms}>Click Here</Button>
+                      </FormHelperText>
+                    </FormControl>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </Flex>
         </GridItem>
       </Grid>
