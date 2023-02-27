@@ -1,6 +1,5 @@
 import Head from "next/head";
-import { Collapse, Image, useDisclosure, VStack } from "@chakra-ui/react";
-import { Inter } from "@next/font/google";
+import { Image, VStack} from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 import {
   Box,
@@ -17,10 +16,8 @@ import {
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { isOpen, onToggle } = useDisclosure();
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleForms = () => {
