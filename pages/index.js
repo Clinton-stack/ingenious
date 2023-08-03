@@ -24,6 +24,8 @@ export default function Home() {
     setIsVisible(!isVisible);
   };
 
+ 
+
   return (
     <>
       <Head>
@@ -33,14 +35,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Grid h="100vh" templateColumns="repeat(5, 1fr)" bg="#ABCDEF">
+      <Grid h="100vh" templateColumns="repeat(5, 1fr)" bg="#5DADEC" overflow='hidden'>
         <GridItem colSpan={2} h="100%">
-          <VStack align="left" spacing={30} h="100%">
+          <VStack align="left" spacing={30} h="100%" m="20px">
             <Image
               src="/ingenious.png"
               alt="INGENIOUS"
               boxSize="65px"
-              m="20px"
+              
             ></Image>
             <Image
               src="/city-image.png"
@@ -58,9 +60,15 @@ export default function Home() {
           colSpan={3}
           h="100%"
           bg="#D8EFFD"
+          bgImage='url(stars3.png)'
+          bgRepeat='no-repeat'
+          bgPos='center'
           borderRadius="40px 0 0 40px"
+          borderLeft='1px solid #85B5E7'
         >
-          <Flex justifyContent="center" alignItems="center" h="100%">
+          <VStack  spacing={200} m='20px' h="100%"  >
+          <Heading as='h3' size='md'>Asset Management System </Heading>
+          <Flex >
             <AnimatePresence>
               {isVisible ? (
                 <motion.div
@@ -74,7 +82,7 @@ export default function Home() {
                     <Heading as="h4" size="md" mb="15px">
                       Login
                     </Heading>
-                    <FormControl mb="20px">
+                    <FormControl mb="20px" w={{base:'100%', lg:'400px'}}>
                       <FormLabel> Username or Email Address:</FormLabel>
                       <Input
                         size="xs"
@@ -82,7 +90,7 @@ export default function Home() {
                         name="email"
                         placeholder="Username/Email Address"
                         variant="flushed"
-                        borderBottom="1px solid #ABCDEF"
+                        borderBottom="1px solid #5DADEC"
                       />
                     </FormControl>
                     <FormControl mb="10px">
@@ -93,14 +101,14 @@ export default function Home() {
                         name="password"
                         placeholder="Password"
                         variant="flushed"
-                        borderBottom="1px solid #ABCDEF"
+                        borderBottom="1px solid #5DADEC"
                       />
                       <FormHelperText>
-                        Forgot Password?
-                        <Button onClick={toggleForms}>Click Here</Button>
+                        Forgot Password?{'  '}
+                        <Button variant='link' color='#5DADEC' onClick={toggleForms}>Click Here </Button>
                       </FormHelperText>
                     </FormControl>
-                    <Button type="submit" bgColor="#ABCDEF" color="white">
+                    <Button type="submit" bgColor="#5DADEC" color="white">
                       Submit
                     </Button>
                   </form>
@@ -117,7 +125,7 @@ export default function Home() {
                     <Heading as="h4" size="md" mb="15px">
                       Forgot Password
                     </Heading>
-                    <FormControl mb="20px">
+                    <FormControl mb="20px" w={{base:'100%', lg:'400px'}}>
                       <FormLabel> Email Address:</FormLabel>
                       <Input
                         size="xs"
@@ -125,17 +133,17 @@ export default function Home() {
                         name="email"
                         placeholder="Email Address"
                         variant="flushed"
-                        borderBottom="1px solid #ABCDEF"
+                        borderBottom="1px solid #5DADEC"
                       />
                       <FormHelperText mb="10px">
                         Enter email address used to open account
                       </FormHelperText>
-                      <Button type="submit" bgColor="#ABCDEF" color="white">
+                      <Button type="submit" bgColor="#5DADEC" color="white">
                         Submit
                       </Button>
                       <FormHelperText>
-                        Go back to Login page{" "}
-                        <Button onClick={toggleForms}>Click Here</Button>
+                        Go back to Login page {'  '}
+                        <Button onClick={toggleForms} variant='link' color='#5DADEC'>Click Here</Button>
                       </FormHelperText>
                     </FormControl>
                   </form>
@@ -143,6 +151,9 @@ export default function Home() {
               )}
             </AnimatePresence>
           </Flex>
+
+          </VStack>
+          
         </GridItem>
       </Grid>
     </>
